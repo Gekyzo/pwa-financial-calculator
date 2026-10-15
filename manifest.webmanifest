@@ -3,7 +3,7 @@
   "short_name": "Finance",
   "description": "Installable web app template",
   "lang": "en",
-  "id": "./",
+  "id": "/pwa-financial-calculator/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

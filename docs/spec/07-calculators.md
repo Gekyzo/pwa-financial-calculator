@@ -38,3 +38,9 @@ The domain of the app: four calculators of money. Each one is a section and a mo
   compounded monthly at the annual rate `r`: `P(1+i)^n + C·((1+i)^n − 1)/i` with `i = r/12`, and
   `P + C·n` for a rate of 0. The table has a row for each year: what was put in up to its end, the
   interest of that year and the balance at its end.
+
+## Simple interest
+
+- **CALC-8** `simpleInterest` solves `I = P·r·t` for the unknown that the user picks: the
+  interest, the principal, the rate or the years. An unknown with a divisor of 0 (a principal at
+  a rate of 0, for one) is `error.zeroDivisor`.

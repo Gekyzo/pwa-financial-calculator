@@ -64,4 +64,5 @@ export default {
   'error.noteMissing': 'The note no longer exists.',
   'error.required': 'Enter a number.',
   'error.notNumber': 'That is not a number.',
+  'error.zeroDivisor': 'No solution: a value is 0.',
 };

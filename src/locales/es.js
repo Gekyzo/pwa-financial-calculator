@@ -64,4 +64,5 @@ export default {
   'error.noteMissing': 'La nota ya no existe.',
   'error.required': 'Escribe un número.',
   'error.notNumber': 'No es un número.',
+  'error.zeroDivisor': 'No tiene solución: un valor es 0.',
 };

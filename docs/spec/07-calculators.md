@@ -31,3 +31,10 @@ The domain of the app: four calculators of money. Each one is a section and a mo
   it; Spain withholds 19 %. The final amount is the deposit plus the net interest.
 - **CALC-6** The APY (TAE) is the growth of 1 € over the term, taken to one year:
   `growth^(12/m) − 1`. Monthly compounding at 3 % is 3.042 %.
+
+## Savings
+
+- **CALC-7** `savings` grows an initial amount and a contribution at the end of each month,
+  compounded monthly at the annual rate `r`: `P(1+i)^n + C·((1+i)^n − 1)/i` with `i = r/12`, and
+  `P + C·n` for a rate of 0. The table has a row for each year: what was put in up to its end, the
+  interest of that year and the balance at its end.

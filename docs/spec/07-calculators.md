@@ -5,13 +5,16 @@ The name of the app is Calculadora financiera in `es` and Financial Calculator i
 
 ## Numbers
 
-- **CALC-1** `parseNumber` reads a typed number. It drops spaces of every kind. With both `,` and
-  `.`, the last one is the decimal mark and the other groups the digits. A mark that comes two or
-  more times groups the digits. A single mark is the decimal mark: `3,2` and `3.2` are 3.2. A blank
-  text is `error.required`; any other text that is not a number is `error.notNumber`.
+- **CALC-1** `parseNumber` reads a typed number by the marks of the format (I18N-8): in `es-ES`,
+  `.` for thousands and `,` for decimals; in `en-GB` and `en-US`, the other way round. It drops
+  spaces of every kind. The thousands mark must split the digits in groups of three, and the
+  decimal mark comes at most one time: in `es-ES`, `200.000`, `200000` and `3,2` are valid, and
+  `3.2` is `error.badGrouping` with the two marks, never 32. A blank text is `error.required`; a
+  text with any other character is `error.notNumber`.
 - **CALC-2** Money is in euros. `formatMoney`, `formatPercent` and `formatNumber` use the format
-  of I18N-8, not the language of the texts: English texts can show `1.234,50 €`. A percentage
-  shows at most three decimals.
+  of I18N-8, not the language of the texts: English texts can show `1.234,50 €`. The groups of
+  thousands always show, for four digits too (`1.000,50 €`). A percentage shows at most three
+  decimals.
 - **CALC-3** A result keeps its full precision. It is rounded to cents only for the screen, and in
   the schedule of a loan (CALC-4).
 
@@ -67,12 +70,15 @@ The name of the app is Calculadora financiera in `es` and Financial Calculator i
 
 ## Doc
 
-- **CALC-11** The doc is `{ version: 1, inputs: { <calculator>: { <field>: text } } }`, stored as
-  JSON under `pwa-financial-calculator.inputs`. It keeps the text of a field as the user typed it,
+- **CALC-11** The doc is `{ version: 1, format, inputs: { <calculator>: { <field>: text } } }`,
+  stored as JSON under `pwa-financial-calculator.inputs`. `format` is the format that the texts are in. It keeps the text of a field as the user typed it,
   valid or not, cut at 40 characters, so a reload shows the same screen. A field with no text
   shows its initial value in the format of I18N-8.
 - **CALC-12** `normalizeInputs` accepts a doc of version 1. It keeps the texts of known fields of
-  known calculators and drops the rest. A stored doc that is not valid is kept under
+  known calculators and an offered format, and drops the rest. `alignInputs` puts the texts in the
+  format in use, at the start and after each change of the format: a valid number is written
+  again with the new marks (`200.000` becomes `200,000`), and any other text stays as typed. A doc
+  with no format is taken to be in the format in use. A stored doc that is not valid is kept under
   `pwa-financial-calculator.inputs.corrupt`, and the app starts with the initial values.
 - **CALC-13** `resetInputs` puts one calculator back to its initial values. An unknown calculator
   or field is `error.fieldMissing`, and nothing changes.
@@ -81,7 +87,8 @@ The name of the app is Calculadora financiera in `es` and Financial Calculator i
 
 - **CALC-14** Each calculator is a section of one centred column: its fields, its results, a table
   by year for the loan and savings, and **Initial values** (CALC-13). A number field takes a decimal
-  keyboard. The results change on each keystroke, with no button. The first result is the main
+  keyboard. The results change on each keystroke, with no button. On leaving a field, a valid
+  number is written again with the marks of the format: `200000` becomes `200.000` in `es-ES`. The first result is the main
   one, larger and across the grid.
 - **CALC-15** A field that is not valid shows its message under it, and the results and the
   table stay in sight, dimmed, until the fields are valid again. Values with no result

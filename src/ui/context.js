@@ -1,4 +1,4 @@
-import { INPUTS_KEY, emptyInputs, normalizeInputs } from '#inputs';
+import { INPUTS_KEY, emptyInputs, normalizeInputs, alignInputs } from '#inputs';
 import {
   loadDoc,
   saveDoc,
@@ -75,7 +75,16 @@ export const textOf = ({ key, params }) => t(key, params);
 const firstStart = storage ? shouldShow({ seen: loadOnboarded(storage), hasState: hasStoredDoc(storage, INPUTS_KEY) }) : false;
 
 const DOC = { key: INPUTS_KEY, normalize: normalizeInputs, empty: emptyInputs };
-export let state = storage ? loadDoc(storage, DOC) : emptyInputs();
+// The texts of the doc follow the format in use, which can change between two starts (CALC-12).
+export let state = alignInputs(storage ? loadDoc(storage, DOC) : emptyInputs(), format);
+
+// Writes the texts of the doc again after a change of the format.
+const alignFormat = () => {
+  const next = alignInputs(state, format);
+  if (next === state) return;
+  state = next;
+  if (storage) saveDoc(storage, INPUTS_KEY, state);
+};
 
 export const ui = {
   // The section in view.
@@ -153,12 +162,14 @@ export const setLanguage = (code) => {
   t = translator(lang);
   // Automatic falls back to the format of the language (I18N-8).
   format = resolveFormat(navigator.languages, chosenFormat, lang);
+  alignFormat();
 };
 
 export const setFormat = (code) => {
   chosenFormat = code;
   if (storage) saveFormat(storage, chosenFormat);
   format = resolveFormat(navigator.languages, chosenFormat, lang);
+  alignFormat();
 };
 
 export const setHand = (value) => {

@@ -1,6 +1,6 @@
 import { IDS, CALCULATORS, shownFields } from '#calculators';
 import { textsOf, setInput, resetInputs, choicesOf, calculate } from '#inputs';
-import { formatMoney, formatPercent, formatNumber } from '#number';
+import { formatMoney, formatPercent, formatNumber, formatInput, parseNumber } from '#number';
 import { $, el, ui, state, lang, format, t, textOf, commit, apply } from '#ui/context';
 import { icon } from '#ui/controls';
 
@@ -28,6 +28,13 @@ const numberField = (id, field, text) => {
     placeholder: label,
     spellcheck: false,
     oninput: (event) => commit(setInput(state, id, field.name, event.target.value).state),
+    // On leaving the field, a valid number takes the marks of the format (CALC-14).
+    onchange: (event) => {
+      const { value, error } = parseNumber(event.target.value, format);
+      if (error) return;
+      event.target.value = formatInput(value, format);
+      commit(setInput(state, id, field.name, event.target.value).state);
+    },
   });
   const error = el('span', { className: 'calc-error', id: `${id}-${field.name}-error` });
   input.setAttribute('aria-describedby', error.id);
@@ -93,7 +100,7 @@ const renderOne = (id) => {
     buildForm(id, section, texts, fields);
     built[id] = signature;
   }
-  const out = calculate(id, texts);
+  const out = calculate(id, texts, format);
   for (const field of fields.filter((one) => one.kind !== 'choice')) {
     const error = out.errors?.[field.name];
     $(`${id}-${field.name}-error`).textContent = error ? textOf(error) : '';

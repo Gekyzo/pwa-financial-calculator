@@ -92,6 +92,7 @@ export default {
   'error.notBackup': 'El archivo no es una copia de esta aplicación.',
   'error.required': 'Escribe un número.',
   'error.notNumber': 'No es un número.',
+  'error.badGrouping': 'Usa «{decimal}» para los decimales y «{group}» para los miles.',
   'error.zeroDivisor': 'No tiene solución: un valor es 0.',
   'error.outOfRange': 'Entre {min} y {max}.',
   'error.notWhole': 'Sin decimales.',

@@ -92,6 +92,7 @@ export default {
   'error.notBackup': 'The file is not a backup of this app.',
   'error.required': 'Enter a number.',
   'error.notNumber': 'That is not a number.',
+  'error.badGrouping': 'Use “{decimal}” for decimals and “{group}” for thousands.',
   'error.zeroDivisor': 'No solution: a value is 0.',
   'error.outOfRange': 'Between {min} and {max}.',
   'error.notWhole': 'No decimals.',

@@ -11,7 +11,7 @@
 | `src/savings.js` | The growth of savings with a monthly contribution | nothing |
 | `src/interest.js` | Simple interest, solved for any one unknown | nothing |
 | `src/calculators.js` | The fields, the results and the table of each calculator | `loan`, `deposit`, `savings`, `interest` |
-| `src/inputs.js` | The doc of typed texts, its validation and the results of a calculator | `config`, `calculators`, `number` |
+| `src/inputs.js` | The doc of typed texts, its format, its validation and the results of a calculator | `config`, `calculators`, `number`, `i18n` |
 | `src/version.js` | Version rules and the update offer rule | nothing |
 | `src/i18n.js` | The language choice and the translator | `locales/*` |
 | `src/sections.js` | The order of the sections and the rule of the slide between them | nothing |

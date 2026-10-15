@@ -7,6 +7,7 @@
 | `src/config.js` | The slug of the app, which `npm run init` rewrites | nothing |
 | `src/number.js` | Parse a typed number; format money and percentages | nothing |
 | `src/loan.js` | The monthly payment and the schedule of a loan | `number` |
+| `src/deposit.js` | The interest, the withholding and the APY of a term deposit | nothing |
 | `src/version.js` | Version rules and the update offer rule | nothing |
 | `src/i18n.js` | The language choice and the translator | `locales/*` |
 | `src/sections.js` | The order of the sections and the rule of the slide between them | nothing |
@@ -84,6 +85,7 @@ The doc keys are in [07-notes.md](07-notes.md). The device preferences are `pwa-
 | `tests/notes.test.js` | The note operations and the validation of the doc (demo) |
 | `tests/number.test.js` | The parse of a typed number and the format of money (CALC-1, CALC-2) |
 | `tests/loan.test.js` | The payment and the schedule of a loan (CALC-4) |
+| `tests/deposit.test.js` | The interest and the APY of a term deposit (CALC-5, CALC-6) |
 | `tests/storage.test.js` | Load, save, the corrupt copy, export, import and the device preferences |
 | `tests/install.test.js` | The install offer states (INS-1) |
 | `tests/swipe.test.js` | The settle rule of a row slide |

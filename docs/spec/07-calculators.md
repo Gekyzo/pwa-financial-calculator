@@ -22,3 +22,12 @@ The domain of the app: four calculators of money. Each one is a section and a mo
   the rest of the payment goes to the principal. The last month pays what is left, so the balance
   closes at 0. The schedule groups the months by year: principal, interest and the balance at its
   end. 200 000 € at 3.2 % over 25 years is 969.36 € a month.
+
+## Deposit
+
+- **CALC-5** `deposit` gives the interest of a term deposit of `m` months at the annual rate `r`
+  (TIN). The interest is paid at maturity (`P·r·m/12`), monthly (`P·((1+r/12)^m − 1)`) or
+  annually (`P·((1+r)^(m/12) − 1)`). The withholding, a percent of the gross interest, comes off
+  it; Spain withholds 19 %. The final amount is the deposit plus the net interest.
+- **CALC-6** The APY (TAE) is the growth of 1 € over the term, taken to one year:
+  `growth^(12/m) − 1`. Monthly compounding at 3 % is 3.042 %.

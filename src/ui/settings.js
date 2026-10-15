@@ -1,6 +1,7 @@
 import { normalizeInputs } from '#inputs';
 import { exportJson, exportFilename, importJson } from '#storage';
-import { LANGUAGES, LANGUAGE_NAMES } from '#i18n';
+import { LANGUAGES, LANGUAGE_NAMES, FORMATS, FORMAT_NAMES } from '#i18n';
+import { formatMoney } from '#number';
 import { switchModule } from '#modules';
 import {
   $,
@@ -9,6 +10,7 @@ import {
   t,
   lang,
   chosen,
+  chosenFormat,
   hand,
   theme,
   off,
@@ -18,6 +20,7 @@ import {
   apply,
   render,
   setLanguage,
+  setFormat,
   setHand,
   setTheme,
   setModules,
@@ -47,6 +50,10 @@ export const applyLanguage = () => {
     option('', t('settings.automatic')),
     ...LANGUAGES.map((code) => option(code, LANGUAGE_NAMES[code])),
   );
+  // Each format shows a sample of money and of a date in it.
+  const sample = (code) => `${FORMAT_NAMES[code]} · ${formatMoney(12345.5, code)} · ${new Date(2026, 9, 15).toLocaleDateString(code)}`;
+  const formatOption = (value, text) => el('option', { value, textContent: text, selected: value === (chosenFormat ?? '') });
+  $('format').replaceChildren(formatOption('', t('settings.automatic')), ...FORMATS.map((code) => formatOption(code, sample(code))));
   const handOption = (value, key) => el('option', { value, textContent: t(key), selected: value === hand });
   $('hand').replaceChildren(handOption('right', 'settings.handRight'), handOption('left', 'settings.handLeft'));
   const themeOption = (value, key) => el('option', { value, textContent: t(key), selected: value === theme });
@@ -75,6 +82,10 @@ export const bind = () => {
   $('import').addEventListener('click', () => $('import-file').click());
   $('language').addEventListener('change', (event) => {
     setLanguage(event.target.value || null);
+    applyLanguage();
+  });
+  $('format').addEventListener('change', (event) => {
+    setFormat(event.target.value || null);
     applyLanguage();
   });
   $('hand').addEventListener('change', (event) => setHand(event.target.value));

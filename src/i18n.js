@@ -24,6 +24,32 @@ export const resolveLanguage = (preferred, stored) => {
   return [preferred ?? []].flat().map(base).find((lang) => LANGUAGES.includes(lang)) ?? FALLBACK;
 };
 
+// The formats of numbers, money and dates, apart from the language of the texts (I18N-7).
+export const FORMATS = ['es-ES', 'en-GB', 'en-US'];
+// The name of each format, in the language of its region.
+export const FORMAT_NAMES = {
+  'es-ES': 'España',
+  'en-GB': 'United Kingdom',
+  'en-US': 'United States',
+};
+// The format of a language when the phone gives no region that is offered.
+const LANGUAGE_FORMATS = { es: 'es-ES', en: 'en-GB' };
+
+const regionOf = (tag) => String(tag ?? '').toUpperCase().split('-')[1] ?? '';
+
+// The format to use (I18N-8): `stored` when it is offered, else the first tag of `preferred`
+// (`navigator.languages`) whose region is the region of a format, so that `en-ES` gives `es-ES`,
+// else the format of `lang`.
+export const resolveFormat = (preferred, stored, lang) => {
+  if (FORMATS.includes(stored)) return stored;
+  for (const tag of [preferred ?? []].flat()) {
+    const region = regionOf(tag);
+    const format = region && FORMATS.find((one) => regionOf(one) === region);
+    if (format) return format;
+  }
+  return LANGUAGE_FORMATS[lang] ?? LANGUAGE_FORMATS[FALLBACK];
+};
+
 // One pass, with a function: a parameter that holds `{name}` or `$&` goes in as typed.
 const fill = (text, params) =>
   text.replace(/\{(\w+)\}/g, (match, name) => (Object.hasOwn(params, name) ? String(params[name]) : match));

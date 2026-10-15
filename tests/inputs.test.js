@@ -7,18 +7,18 @@ test('the key of the inputs has the slug', () => {
   assert.equal(INPUTS_KEY, `${APP_SLUG}.inputs`);
 });
 
-test('a field with no text shows its initial value in the format of the language', () => {
-  assert.deepEqual(textsOf(emptyInputs(), 'loan', 'es'), { amount: '200000', rate: '3,2', years: '25' });
-  assert.deepEqual(textsOf(emptyInputs(), 'loan', 'en'), { amount: '200000', rate: '3.2', years: '25' });
-  assert.equal(textsOf(emptyInputs(), 'deposit', 'es').compounding, 'maturity');
+test('a field with no text shows its initial value in the chosen format', () => {
+  assert.deepEqual(textsOf(emptyInputs(), 'loan', 'es-ES'), { amount: '200000', rate: '3,2', years: '25' });
+  assert.deepEqual(textsOf(emptyInputs(), 'loan', 'en-GB'), { amount: '200000', rate: '3.2', years: '25' });
+  assert.equal(textsOf(emptyInputs(), 'deposit', 'es-ES').compounding, 'maturity');
 });
 
 test('a typed text is kept as typed, and the input state is unchanged', () => {
   const state = emptyInputs();
   const { state: next, error } = setInput(state, 'loan', 'rate', '4,1');
   assert.equal(error, undefined);
-  assert.equal(textsOf(next, 'loan', 'en').rate, '4,1');
-  assert.equal(textsOf(next, 'loan', 'en').amount, '200000');
+  assert.equal(textsOf(next, 'loan', 'en-GB').rate, '4,1');
+  assert.equal(textsOf(next, 'loan', 'en-GB').amount, '200000');
   assert.deepEqual(state, emptyInputs());
 });
 

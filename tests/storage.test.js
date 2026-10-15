@@ -12,6 +12,9 @@ import {
   LANGUAGE_KEY,
   loadLanguage,
   saveLanguage,
+  FORMAT_KEY,
+  loadFormat,
+  saveFormat,
   HAND_KEY,
   loadHand,
   saveHand,
@@ -53,7 +56,7 @@ const normalize = (data) => (data?.version === 1 && Array.isArray(data.items) ? 
 const opts = { key: KEY, normalize, empty };
 
 test('every key starts with the slug of the app', () => {
-  for (const key of [KEY, LANGUAGE_KEY, HAND_KEY, THEME_KEY, MODULES_KEY, ONBOARDED_KEY]) {
+  for (const key of [KEY, LANGUAGE_KEY, FORMAT_KEY, HAND_KEY, THEME_KEY, MODULES_KEY, ONBOARDED_KEY]) {
     assert.ok(key.startsWith(`${APP_SLUG}.`), key);
   }
 });
@@ -248,4 +251,24 @@ test('saveOnboarded stores the flag, and is false for a storage that throws', ()
   assert.equal(saveOnboarded(storage), true);
   assert.equal(storage.getItem(ONBOARDED_KEY), '1');
   assert.equal(saveOnboarded(brokenStorage()), false);
+});
+
+test('loadFormat returns the stored format when it is offered, else null', () => {
+  const offered = ['es-ES', 'en-GB'];
+  assert.equal(loadFormat(fakeStorage({ [FORMAT_KEY]: 'es-ES' }), offered), 'es-ES');
+  assert.equal(loadFormat(fakeStorage(), offered), null);
+  assert.equal(loadFormat(fakeStorage({ [FORMAT_KEY]: 'fr-FR' }), offered), null);
+});
+
+test('saveFormat stores a format and null removes it', () => {
+  const storage = fakeStorage();
+  assert.equal(saveFormat(storage, 'en-US'), true);
+  assert.equal(storage.getItem(FORMAT_KEY), 'en-US');
+  assert.equal(saveFormat(storage, null), true);
+  assert.equal(storage.getItem(FORMAT_KEY), null);
+});
+
+test('the format functions do not throw when the storage does', () => {
+  assert.equal(loadFormat(brokenStorage(), ['es-ES']), null);
+  assert.equal(saveFormat(brokenStorage(), 'es-ES'), false);
 });

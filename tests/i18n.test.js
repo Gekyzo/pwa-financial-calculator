@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { CATALOGS, FALLBACK, LANGUAGES, LANGUAGE_NAMES, intlTag, resolveLanguage, translator } from '#i18n';
+import { CATALOGS, FALLBACK, LANGUAGES, LANGUAGE_NAMES, FORMATS, FORMAT_NAMES, intlTag, resolveLanguage, resolveFormat, translator } from '#i18n';
 
 const fake = {
   en: { hello: 'Hello {name}', items: { one: '{count} item', other: '{count} items' }, onlyEn: 'English only' },
@@ -116,4 +116,35 @@ test('the Spanish catalog has each message key of the pure modules', () => {
 
 test('intlTag gives the code of each language that has no regional tag', () => {
   for (const lang of LANGUAGES) assert.equal(intlTag(lang), lang);
+});
+
+test('the formats, each with its name', () => {
+  assert.deepEqual(FORMATS, ['es-ES', 'en-GB', 'en-US']);
+  assert.deepEqual(Object.keys(FORMAT_NAMES), FORMATS);
+});
+
+test('a stored format that is offered wins over the phone and the language', () => {
+  assert.equal(resolveFormat(['en-US'], 'es-ES', 'en'), 'es-ES');
+});
+
+test('a stored format that is not offered is ignored', () => {
+  assert.equal(resolveFormat(['en-US'], 'fr-FR', 'en'), 'en-US');
+});
+
+test('with no stored format, the region of the phone picks it, whatever its language', () => {
+  assert.equal(resolveFormat(['en-ES'], null, 'en'), 'es-ES');
+  assert.equal(resolveFormat(['es-ES'], null, 'en'), 'es-ES');
+  assert.equal(resolveFormat(['en-US'], null, 'es'), 'en-US');
+  assert.equal(resolveFormat(['en-gb'], null, 'es'), 'en-GB');
+});
+
+test('the first phone tag with an offered region wins', () => {
+  assert.equal(resolveFormat(['fr-FR', 'en', 'ca-ES', 'en-US'], null, 'en'), 'es-ES');
+});
+
+test('with no offered region, the format of the language', () => {
+  assert.equal(resolveFormat(['fr-FR', 'en'], null, 'en'), 'en-GB');
+  assert.equal(resolveFormat(['es'], null, 'es'), 'es-ES');
+  assert.equal(resolveFormat(undefined, null, 'es'), 'es-ES');
+  assert.equal(resolveFormat([], undefined, 'xx'), 'en-GB');
 });

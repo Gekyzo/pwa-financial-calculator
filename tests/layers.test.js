@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 // The layer rules of docs/spec/12-engineering.md that the module table does not check (ENG-16).
 const root = new URL('../', import.meta.url);
@@ -14,7 +16,7 @@ const importsOf = (name) => [...read(`src/${name}.js`).matchAll(/from '#([\w/]+)
 
 // The values that a module shares through a live binding. Only their owner assigns them.
 const OWNED = {
-  'ui/context': ['chosen', 'lang', 't', 'hand', 'theme', 'off', 'navMotion', 'state', 'toastAction', 'clickGuardUntil'],
+  'ui/context': ['chosen', 'lang', 't', 'chosenFormat', 'format', 'hand', 'theme', 'off', 'navMotion', 'state', 'toastAction', 'clickGuardUntil'],
 };
 
 test('the views exist', () => {
@@ -63,4 +65,13 @@ test('SHELL of sw.js has each module of src', () => {
 test('SHELL of sw.js has the style sheet and the icons', () => {
   const shell = read('sw.js');
   for (const file of ['./styles.css', './icons.svg']) assert.ok(shell.includes(`'${file}'`), file);
+});
+
+// A view needs the DOM, so no unit test imports it; this check parses it, so that an error of
+// syntax, such as a name declared two times, fails here and not only in the browser.
+test('each module of src parses', () => {
+  for (const name of [...modules, '../sw']) {
+    const path = fileURLToPath(new URL(`src/${name}.js`, root));
+    assert.doesNotThrow(() => execFileSync(process.execPath, ['--check', path], { stdio: 'pipe' }), name);
+  }
 });

@@ -22,11 +22,11 @@
 | `src/onboarding.js` | The show rule and the page steps of the walkthrough (optional) | nothing |
 | `src/ui/context.js` | The values that the views share, the toast, `render`, `commit` and `apply` | `inputs`, `storage`, `i18n`, `onboarding` |
 | `src/ui/controls.js` | The icon builder and the side-action button | `ui/context` |
-| `src/ui/update.js` | The version line, the check, the refresh and the update toast | `version`, `i18n`, `ui/context` |
+| `src/ui/update.js` | The version line, the check, the refresh and the update toast | `version`, `ui/context` |
 | `src/ui/install.js` | The Install button | `install`, `ui/context` |
 | `src/ui/nav.js` | The navigation, the change and the slide of a section | `sections`, `modules`, `ui/context`, `ui/update`, `ui/dust` |
 | `src/ui/calculator.js` | The four calculator sections: their fields, results and table by year | `calculators`, `inputs`, `number`, `ui/context`, `ui/controls` |
-| `src/ui/settings.js` | Settings, and the text of the page in its language | `inputs`, `storage`, `i18n`, `modules`, `ui/context`, `ui/update`, `ui/onboarding` |
+| `src/ui/settings.js` | Settings, and the text of the page in its language | `inputs`, `storage`, `i18n`, `number`, `modules`, `ui/context`, `ui/update`, `ui/onboarding` |
 | `src/ui/dust.js` | The dust of a navigation item (optional) | `particles`, `ui/context`, `ui/controls` |
 | `src/ui/onboarding.js` | The walkthrough (optional) | `onboarding`, `sections`, `storage`, `ui/context`, `ui/controls` |
 | `src/app.js` | Wires the views, the global keys, the service worker and the update check | all of the above |
@@ -59,7 +59,7 @@
 
 ## Storage keys
 
-The doc keys are in [07-calculators.md](07-calculators.md). The device preferences are `pwa-financial-calculator.lang`,
+The doc keys are in [07-calculators.md](07-calculators.md). The device preferences are `pwa-financial-calculator.lang`, `pwa-financial-calculator.format`,
 `pwa-financial-calculator.hand`, `pwa-financial-calculator.theme`, `pwa-financial-calculator.modules` and `pwa-financial-calculator.onboarded`.
 
 ## Change guide

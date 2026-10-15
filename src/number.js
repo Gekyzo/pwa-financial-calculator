@@ -1,8 +1,5 @@
-// The numbers that the user types, and the text of a result.
-
-// The locale of the number format of each language of the app.
-const LOCALES = { es: 'es-ES', en: 'en-GB' };
-const localeOf = (lang) => LOCALES[lang] ?? LOCALES.en;
+// The numbers that the user types, and the text of a result in a format (`locale`, such as
+// `es-ES`), which is apart from the language of the texts (I18N-7).
 
 // Spaces of every kind, which a phone or a copy puts between groups of digits.
 const SPACES = /[\s  ]/g;
@@ -33,16 +30,16 @@ export const parseNumber = (text) => {
 // Rounded to cents, with the half going away from zero.
 export const round2 = (n) => Math.sign(n) * Math.round((Math.abs(n) + Number.EPSILON) * 100) / 100;
 
-export const formatMoney = (n, lang) =>
-  new Intl.NumberFormat(localeOf(lang), { style: 'currency', currency: 'EUR' }).format(n);
+export const formatMoney = (n, locale) =>
+  new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' }).format(n);
 
 // `n` is a percentage: 3.2 is 3.2 %.
-export const formatPercent = (n, lang) =>
-  new Intl.NumberFormat(localeOf(lang), { style: 'percent', maximumFractionDigits: 3 }).format(n / 100);
+export const formatPercent = (n, locale) =>
+  new Intl.NumberFormat(locale, { style: 'percent', maximumFractionDigits: 3 }).format(n / 100);
 
 // A number with no unit, with at most two decimals.
-export const formatNumber = (n, lang) => new Intl.NumberFormat(localeOf(lang), { maximumFractionDigits: 2 }).format(n);
+export const formatNumber = (n, locale) => new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n);
 
-// A plain number for an input field: no grouping, the decimal mark of the language.
-export const formatInput = (n, lang) =>
-  new Intl.NumberFormat(localeOf(lang), { useGrouping: false, maximumFractionDigits: 6 }).format(n);
+// A plain number for an input field: no grouping, the decimal mark of the format.
+export const formatInput = (n, locale) =>
+  new Intl.NumberFormat(locale, { useGrouping: false, maximumFractionDigits: 6 }).format(n);

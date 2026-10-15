@@ -11,14 +11,14 @@ export const emptyInputs = () => ({ version: 1, inputs: {} });
 
 const fieldOf = (id, name) => CALCULATORS[id]?.fields.find((field) => field.name === name) ?? null;
 
-// The text of each field of a calculator: the stored one, else its initial value in the number
-// format of `lang`.
-export const textsOf = (state, id, lang) =>
+// The text of each field of a calculator: the stored one, else its initial value in the format
+// `locale`.
+export const textsOf = (state, id, locale) =>
   Object.fromEntries(
     CALCULATORS[id].fields.map((field) => {
       const stored = state.inputs[id]?.[field.name];
       if (stored !== undefined) return [field.name, stored];
-      return [field.name, field.kind === 'choice' ? field.initial : formatInput(field.initial, lang)];
+      return [field.name, field.kind === 'choice' ? field.initial : formatInput(field.initial, locale)];
     }),
   );
 

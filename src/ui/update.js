@@ -1,14 +1,14 @@
 import { parseVersion, versionStatus, shouldOfferUpdate } from '#version';
-import { intlTag } from '#i18n';
-import { REFRESH_MS, CHECK_MS, $, ui, t, lang, showToast } from '#ui/context';
+import { REFRESH_MS, CHECK_MS, $, ui, t, format, showToast } from '#ui/context';
 
 const VERSION_KEYS = { current: 'version.current', unknown: 'version.unknown' };
 
 export const renderVersion = () => {
   const { running, latest, checking } = ui.version;
   const status = versionStatus(running, latest);
-  const dateForm = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
-  const date = running && new Date(running.date).toLocaleString(intlTag(lang), dateForm);
+  // Day, month and year in numbers, in the chosen format (I18N-9).
+  const dateForm = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const date = running && new Date(running.date).toLocaleString(format, dateForm);
   $('version').textContent = running ? t('version.running', { version: running.version, date }) : t('version.none');
   const text = checking
     ? t('version.checking')

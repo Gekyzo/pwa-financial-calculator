@@ -4,6 +4,8 @@ import {
   saveDoc,
   loadLanguage,
   saveLanguage,
+  loadFormat,
+  saveFormat,
   loadHand,
   saveHand,
   loadTheme,
@@ -13,7 +15,7 @@ import {
   loadOnboarded,
   hasStoredDoc,
 } from '#storage';
-import { LANGUAGES, resolveLanguage, translator } from '#i18n';
+import { LANGUAGES, FORMATS, resolveLanguage, resolveFormat, translator } from '#i18n';
 import { shouldShow } from '#onboarding';
 
 // The values that the views share. A view reads them through the import, a live binding, and
@@ -49,6 +51,10 @@ export const scroller = document.querySelector('main');
 export let chosen = storage ? loadLanguage(storage, LANGUAGES) : null;
 export let lang = resolveLanguage(navigator.languages, chosen);
 export let t = translator(lang);
+// The format of numbers, money and dates (I18N-7): the choice of the user, or null to follow the
+// phone; and the format in use.
+export let chosenFormat = storage ? loadFormat(storage, FORMATS) : null;
+export let format = resolveFormat(navigator.languages, chosenFormat, lang);
 // The hand that holds the phone: `left` mirrors the controls, in styles.css.
 export let hand = storage ? loadHand(storage) : 'right';
 document.documentElement.dataset.hand = hand;
@@ -145,6 +151,14 @@ export const setLanguage = (code) => {
   if (storage) saveLanguage(storage, chosen);
   lang = resolveLanguage(navigator.languages, chosen);
   t = translator(lang);
+  // Automatic falls back to the format of the language (I18N-8).
+  format = resolveFormat(navigator.languages, chosenFormat, lang);
+};
+
+export const setFormat = (code) => {
+  chosenFormat = code;
+  if (storage) saveFormat(storage, chosenFormat);
+  format = resolveFormat(navigator.languages, chosenFormat, lang);
 };
 
 export const setHand = (value) => {

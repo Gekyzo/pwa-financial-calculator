@@ -61,6 +61,7 @@ export default {
   'settings.export': 'Export',
   'settings.import': 'Import',
   'settings.language': 'Language',
+  'settings.format': 'Number and date format',
   'settings.automatic': 'Automatic',
   'settings.hand': 'Hand',
   'settings.handRight': 'Right',

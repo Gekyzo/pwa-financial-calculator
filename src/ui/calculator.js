@@ -1,19 +1,19 @@
 import { IDS, CALCULATORS, shownFields } from '#calculators';
 import { textsOf, setInput, resetInputs, choicesOf, calculate } from '#inputs';
 import { formatMoney, formatPercent, formatNumber } from '#number';
-import { $, el, ui, state, lang, t, textOf, commit, apply } from '#ui/context';
+import { $, el, ui, state, lang, format, t, textOf, commit, apply } from '#ui/context';
 import { icon } from '#ui/controls';
 
-// The form of a calculator is built again only when its fields change: the language, the choice
+// The form of a calculator is built again only when its fields change: the language, the format, the choice
 // that hides a field, or a reset. A keystroke keeps the form, so the field keeps its focus.
 const built = {};
 let resets = 0;
 
-const format = (kind, value) => {
-  if (kind === 'money') return formatMoney(value, lang);
-  if (kind === 'percent') return formatPercent(value, lang);
+const show = (kind, value) => {
+  if (kind === 'money') return formatMoney(value, format);
+  if (kind === 'percent') return formatPercent(value, format);
   if (kind === 'count') return String(value);
-  return formatNumber(value, lang);
+  return formatNumber(value, format);
 };
 
 const numberField = (id, field, text) => {
@@ -74,21 +74,21 @@ const buildForm = (id, section, texts, fields) => {
 const resultCard = ({ key, kind, value }, index) =>
   el('div', { className: index === 0 ? 'calc-result main' : 'calc-result' }, [
     el('span', { className: 'calc-result-label', textContent: t(`result.${key}`) }),
-    el('span', { className: 'calc-result-value', textContent: format(kind, value) }),
+    el('span', { className: 'calc-result-value', textContent: show(kind, value) }),
   ]);
 
 const scheduleTable = (id, { columns, rows }) => {
   const head = el('tr', {}, columns.map(({ key }) => el('th', { scope: 'col', textContent: t(`column.${id}.${key}`) })));
-  const body = rows.map((row) => el('tr', {}, columns.map(({ key, kind }) => el('td', { textContent: format(kind, row[key]) }))));
+  const body = rows.map((row) => el('tr', {}, columns.map(({ key, kind }) => el('td', { textContent: show(kind, row[key]) }))));
   return el('div', { className: 'calc-table-box' }, [el('table', { className: 'calc-table' }, [el('thead', {}, [head]), el('tbody', {}, body)])]);
 };
 
 const renderOne = (id) => {
   const section = $(id);
-  const texts = textsOf(state, id, lang);
+  const texts = textsOf(state, id, format);
   const choices = choicesOf(id, texts);
   const fields = shownFields(id, choices);
-  const signature = [lang, resets, ...fields.map((field) => field.name), ...Object.values(choices)].join('|');
+  const signature = [lang, format, resets, ...fields.map((field) => field.name), ...Object.values(choices)].join('|');
   if (built[id] !== signature) {
     buildForm(id, section, texts, fields);
     built[id] = signature;

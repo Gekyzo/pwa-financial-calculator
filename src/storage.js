@@ -86,6 +86,30 @@ export const saveLanguage = (storage, lang) => {
   }
 };
 
+// The format of numbers and dates that the user chose (I18N-7). A preference of the device.
+export const FORMAT_KEY = keyOf('format');
+
+// The stored format when it is one of `offered`, else null: the app follows the phone.
+export const loadFormat = (storage, offered) => {
+  try {
+    const format = storage.getItem(FORMAT_KEY);
+    return offered.includes(format) ? format : null;
+  } catch {
+    return null;
+  }
+};
+
+// `null` removes the choice.
+export const saveFormat = (storage, format) => {
+  try {
+    if (format === null) storage.removeItem(FORMAT_KEY);
+    else storage.setItem(FORMAT_KEY, format);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 // The hand that the user holds the phone with. It is a preference of the device, as the language is.
 export const HAND_KEY = keyOf('hand');
 

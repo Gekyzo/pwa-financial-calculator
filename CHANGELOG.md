@@ -4,6 +4,8 @@ User-visible changes, newest first.
 
 ## Unreleased
 
+- Settings → Number and date format: show money and dates in Spanish, British or US format,
+  apart from the language of the texts. Automatic follows the region of the phone.
 - Loan and mortgage calculator: monthly payment, total interest and a table by year.
 - Term deposit calculator: interest at maturity, monthly or yearly, the withholding and the APY.
 - Savings calculator: an initial amount and a monthly contribution, with a table by year.

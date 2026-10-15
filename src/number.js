@@ -40,6 +40,9 @@ export const formatMoney = (n, lang) =>
 export const formatPercent = (n, lang) =>
   new Intl.NumberFormat(localeOf(lang), { style: 'percent', maximumFractionDigits: 3 }).format(n / 100);
 
+// A number with no unit, with at most two decimals.
+export const formatNumber = (n, lang) => new Intl.NumberFormat(localeOf(lang), { maximumFractionDigits: 2 }).format(n);
+
 // A plain number for an input field: no grouping, the decimal mark of the language.
 export const formatInput = (n, lang) =>
   new Intl.NumberFormat(localeOf(lang), { useGrouping: false, maximumFractionDigits: 6 }).format(n);

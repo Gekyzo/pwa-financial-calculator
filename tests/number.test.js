@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseNumber, round2, formatMoney, formatPercent, formatInput } from '#number';
+import { parseNumber, round2, formatMoney, formatPercent, formatNumber, formatInput } from '#number';
 
 test('a single mark is the decimal mark', () => {
   assert.deepEqual(parseNumber('3,2'), { value: 3.2 });
@@ -61,6 +61,11 @@ test('a percentage is in the format of the language', () => {
   assert.equal(formatPercent(3.2, 'es'), '3,2 %');
   assert.equal(formatPercent(3.2, 'en'), '3.2%');
   assert.equal(formatPercent(3.0417, 'en'), '3.042%');
+});
+
+test('a number with no unit has at most two decimals', () => {
+  assert.equal(formatNumber(2.5, 'es'), '2,5');
+  assert.equal(formatNumber(12345.678, 'en'), '12,345.68');
 });
 
 test('an input value has no grouping and the decimal mark of the language', () => {

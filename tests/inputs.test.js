@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { APP_SLUG } from '#config';
-import { INPUTS_KEY, MAX_TEXT, emptyInputs, textsOf, setInput, resetInputs, validate, calculate, normalizeInputs } from '#inputs';
+import { INPUTS_KEY, MAX_TEXT, emptyInputs, textsOf, setInput, resetInputs, choicesOf, validate, calculate, normalizeInputs } from '#inputs';
 
 test('the key of the inputs has the slug', () => {
   assert.equal(INPUTS_KEY, `${APP_SLUG}.inputs`);
@@ -70,6 +70,12 @@ test('a value out of its range is an error with the range', () => {
   assert.deepEqual(validate('loan', { amount: '1000', rate: '-1', years: '5' }).errors, {
     rate: { key: 'error.outOfRange', params: { min: 0, max: 100 } },
   });
+});
+
+test('choicesOf gives only the choice fields, whatever the numbers are', () => {
+  assert.deepEqual(choicesOf('loan', { amount: '1', rate: 'x', years: '' }), {});
+  assert.deepEqual(choicesOf('interest', { solve: 'rate', principal: 'x' }), { solve: 'rate' });
+  assert.deepEqual(choicesOf('deposit', { compounding: 'weekly' }), { compounding: 'maturity' });
 });
 
 test('an unknown choice is the first option', () => {

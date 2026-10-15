@@ -75,3 +75,15 @@ The domain of the app: four calculators of money. Each one is a section and a mo
   `pwa-financial-calculator.inputs.corrupt`, and the app starts with the initial values.
 - **CALC-13** `resetInputs` puts one calculator back to its initial values. An unknown calculator
   or field is `error.fieldMissing`, and nothing changes.
+
+## Screen
+
+- **CALC-14** Each calculator is a section of one centred column: its fields, its results, a table
+  by year for the loan and savings, and **Initial values** (CALC-13). A number field takes a decimal
+  keyboard. The results change on each keystroke, with no button. The first result is the main
+  one, larger and across the grid.
+- **CALC-15** A field that is not valid shows its message under it, and the results and the
+  table stay in sight, dimmed, until the fields are valid again. Values with no result
+  (CALC-8) show the message in place of the results.
+- **CALC-16** A keystroke keeps the form, so the field keeps its focus. The form is built again
+  only when the language, the unknown of simple interest or a reset changes its fields.

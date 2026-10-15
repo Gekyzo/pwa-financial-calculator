@@ -16,12 +16,11 @@ The names of the screen are the English ones; `src/locales/es.js` is the source 
 | [04-design-system.md](04-design-system.md) | Layers, tokens, components, icons, breakpoints and the catalogue |
 | [05-layout.md](05-layout.md) | Size classes, navigation, sections, modules and the walkthrough |
 | [06-i18n.md](06-i18n.md) | The languages and the rules of the text |
-| [07-notes.md](07-notes.md) | The notes demo: the domain that each app replaces |
 | [07-calculators.md](07-calculators.md) | The calculators: loan, deposit, savings and simple interest |
 
 ## Rule identifiers
 
-Each rule has an identifier, a prefix and a number, such as `NOTE-3`. An identifier is stable: a
+Each rule has an identifier, a prefix and a number, such as `CALC-3`. An identifier is stable: a
 rule that goes away keeps its number, marked as removed, and a new rule gets the next number. Use
 the identifier in a commit body or in a test name to point at a rule.
 
@@ -33,7 +32,6 @@ the identifier in a commit body or in a test name to point at a rule.
 | `DS` | 04-design-system |
 | `LAY`, `NAV`, `MOD`, `ONB` | 05-layout |
 | `I18N` | 06-i18n |
-| `NOTE` | 07-notes |
 | `CALC` | 07-calculators |
 
 ## Words
@@ -43,7 +41,7 @@ the identifier in a commit body or in a test name to point at a rule.
 | Shell | The files that the service worker keeps for offline use: `SHELL` of `sw.js` |
 | Deploy | A release tag `vX.Y.Z` that GitHub Pages publishes |
 | Size class | compact (below 600px), medium (600px to 839px) or expanded (840px and up) |
-| Section | One of the screens of the navigation: Notes and Settings |
+| Section | One of the screens of the navigation: Loan, Deposit, Savings, Interest and Settings |
 | Module | A part of the app that Settings turns off, with its sections |
 | Pane | The list and the detail of one entry, side by side in the expanded class |
 | Sheet | A panel that comes up from the bottom of the screen |

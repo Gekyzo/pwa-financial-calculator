@@ -2,7 +2,7 @@ import { parseCatalog, classesInScript, menuOf } from './catalog.js';
 
 // A browser cannot list a directory, so the views are named here. tests/design.test.js keeps the
 // list equal to src/ui/.
-const UI = ['context', 'controls', 'drag', 'dust', 'install', 'motion', 'nav', 'notes', 'onboarding', 'settings', 'update'];
+const UI = ['calculator', 'context', 'controls', 'dust', 'install', 'nav', 'onboarding', 'settings', 'update'];
 
 const $ = (id) => document.getElementById(id);
 

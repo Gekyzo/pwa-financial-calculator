@@ -25,23 +25,10 @@
     </div>
 
     <main>
-      <section id="notes" class="pane">
-        <div class="pane-list">
-          <ul id="note-list" class="item-list"></ul>
-          <div id="notes-empty" class="empty-state" hidden>
-            <p data-i18n="notes.empty"></p>
-          </div>
-        </div>
-        <article id="note-detail" class="pane-detail">
-          <button id="note-back" class="button quiet pane-back" type="button" data-i18n="notes.back"></button>
-          <p id="note-detail-empty" class="empty-state" data-i18n="notes.pick"></p>
-          <p id="note-detail-text"></p>
-          <div id="note-actions" class="cluster">
-            <button id="note-edit" class="button outline" type="button" data-i18n="notes.edit"></button>
-            <button id="note-delete" class="button danger" type="button"><svg class="icon" aria-hidden="true"><use href="icons.svg#trash"/></svg><span data-i18n="notes.delete"></span></button>
-          </div>
-        </article>
-      </section>
+      <section id="loan" class="calc" hidden></section>
+      <section id="deposit" class="calc" hidden></section>
+      <section id="savings" class="calc" hidden></section>
+      <section id="interest" class="calc" hidden></section>
 
       <section id="settings" class="settings" hidden>
         <h2 class="settings-title" data-i18n="settings.backup"></h2>
@@ -63,7 +50,10 @@
         </div>
         <h2 class="settings-title" data-i18n="settings.modules"></h2>
         <div class="list-group">
-          <label class="switch"><span data-i18n="nav.notes"></span><input class="switch-input" type="checkbox" role="switch" data-module="notes"></label>
+          <label class="switch"><span data-i18n="nav.loan"></span><input class="switch-input" type="checkbox" role="switch" data-module="loan"></label>
+          <label class="switch"><span data-i18n="nav.deposit"></span><input class="switch-input" type="checkbox" role="switch" data-module="deposit"></label>
+          <label class="switch"><span data-i18n="nav.savings"></span><input class="switch-input" type="checkbox" role="switch" data-module="savings"></label>
+          <label class="switch"><span data-i18n="nav.interest"></span><input class="switch-input" type="checkbox" role="switch" data-module="interest"></label>
         </div>
         <h2 class="settings-title" data-i18n="settings.app"></h2>
         <div class="list-group">
@@ -80,28 +70,28 @@
       </section>
     </main>
 
-    <button id="fab" class="fab" type="button" data-i18n-attr="aria-label:notes.add">+</button>
-
     <nav class="nav-bar" data-i18n-attr="aria-label:nav.label">
-      <button class="nav-item" type="button" data-view="notes">
-        <svg class="icon" aria-hidden="true"><use href="icons.svg#note"/></svg>
-        <span data-i18n="nav.notes"></span>
+      <button class="nav-item" type="button" data-view="loan">
+        <svg class="icon" aria-hidden="true"><use href="icons.svg#loan"/></svg>
+        <span data-i18n="nav.loan"></span>
+      </button>
+      <button class="nav-item" type="button" data-view="deposit">
+        <svg class="icon" aria-hidden="true"><use href="icons.svg#deposit"/></svg>
+        <span data-i18n="nav.deposit"></span>
+      </button>
+      <button class="nav-item" type="button" data-view="savings">
+        <svg class="icon" aria-hidden="true"><use href="icons.svg#savings"/></svg>
+        <span data-i18n="nav.savings"></span>
+      </button>
+      <button class="nav-item" type="button" data-view="interest">
+        <svg class="icon" aria-hidden="true"><use href="icons.svg#interest"/></svg>
+        <span data-i18n="nav.interest"></span>
       </button>
       <button class="nav-item" type="button" data-view="settings">
         <svg class="icon" aria-hidden="true"><use href="icons.svg#settings"/></svg>
         <span data-i18n="nav.settings"></span>
       </button>
     </nav>
-
-    <div id="note-sheet" class="sheet-layer" hidden>
-      <div id="note-veil" class="sheet-veil"></div>
-      <form id="note-form" class="sheet" role="dialog" aria-modal="true" aria-labelledby="note-sheet-title" autocomplete="off">
-        <div class="sheet-grab"></div>
-        <h2 id="note-sheet-title" class="sheet-title"></h2>
-        <label class="field"><textarea id="note-text" class="input" maxlength="200" rows="3" required></textarea><span class="field-label" data-i18n="notes.text"></span></label>
-        <button class="button primary wide" type="submit" data-i18n="notes.save"></button>
-      </form>
-    </div>
 
     <div id="onboarding" class="onboarding" role="dialog" aria-modal="true" data-i18n-attr="aria-label:onboarding.label" hidden>
       <img class="onboarding-logo" src="./icons/logo.png" alt="">
@@ -146,7 +136,6 @@
           "#deposit": "./src/deposit.js",
           "#loan": "./src/loan.js",
           "#number": "./src/number.js",
-          "#notes": "./src/notes.js",
           "#install": "./src/install.js",
           "#sections": "./src/sections.js",
           "#modules": "./src/modules.js",
@@ -158,15 +147,11 @@
           "#ui/context": "./src/ui/context.js",
           "#ui/controls": "./src/ui/controls.js",
           "#ui/install": "./src/ui/install.js",
-          "#ui/motion": "./src/ui/motion.js",
           "#ui/nav": "./src/ui/nav.js",
-          "#ui/notes": "./src/ui/notes.js",
+          "#ui/calculator": "./src/ui/calculator.js",
           "#ui/settings": "./src/ui/settings.js",
-          "#swipe": "./src/swipe.js",
-          "#reorder": "./src/reorder.js",
           "#particles": "./src/particles.js",
           "#onboarding": "./src/onboarding.js",
-          "#ui/drag": "./src/ui/drag.js",
           "#ui/dust": "./src/ui/dust.js",
           "#ui/onboarding": "./src/ui/onboarding.js",
           "#ui/update": "./src/ui/update.js"

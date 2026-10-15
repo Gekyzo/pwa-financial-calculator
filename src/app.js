@@ -1,16 +1,15 @@
-import { $, ui, storage, t, setRender, render, showToast, hideToast, toastAction, clickGuardUntil } from '#ui/context';
+import { $, ui, storage, t, setRender, showToast, hideToast, toastAction, clickGuardUntil } from '#ui/context';
 import { bind as bindNav, renderNav } from '#ui/nav';
-import { bind as bindNotes, renderNotes, closeNoteSheet } from '#ui/notes';
+import { renderCalculators } from '#ui/calculator';
 import { bind as bindSettings, applyLanguage } from '#ui/settings';
 import { bind as bindInstall, renderInstall } from '#ui/install';
 import { readVersion, renderVersion, offerUpdate } from '#ui/update';
-import { bind as bindDrag, endReorder } from '#ui/drag';
 import { bind as bindOnboarding, closeOnboarding, turnOnboarding } from '#ui/onboarding';
 
 const renderAll = () => {
   renderNav();
   $('title').textContent = t(`nav.${ui.view}`);
-  renderNotes();
+  renderCalculators();
   $('settings').hidden = ui.view !== 'settings';
   renderVersion();
   renderInstall();
@@ -18,10 +17,8 @@ const renderAll = () => {
 setRender(renderAll);
 
 bindNav();
-bindNotes();
 bindSettings();
 bindInstall();
-bindDrag();
 bindOnboarding();
 
 document.addEventListener(
@@ -40,13 +37,6 @@ document.addEventListener('keydown', (event) => {
     else if (event.key === 'ArrowRight') turnOnboarding(1);
     else if (event.key === 'ArrowLeft') turnOnboarding(-1);
     return;
-  }
-  if (event.key !== 'Escape') return;
-  endReorder(false);
-  if (ui.sheetOpen) closeNoteSheet();
-  else if (ui.noteId !== null) {
-    ui.noteId = null;
-    render();
   }
 });
 

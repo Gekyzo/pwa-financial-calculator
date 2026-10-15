@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { CATALOGS } from '#i18n';
 import { PAGES } from '#onboarding';
+import { IDS } from '#calculators';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const body = html.slice(html.indexOf('<body'), html.indexOf('<script type="importmap">'));
@@ -33,11 +34,13 @@ test('the markup has no text of its own', () => {
   assert.doesNotMatch(body, /\s(aria-label|placeholder|title)="/);
 });
 
-test('the note sheet has a veil, a dialog and a text field with the maximum length', () => {
-  const [layer = ''] = body.match(/<div id="note-sheet" class="sheet-layer"[\s\S]*?<\/form>\s*<\/div>/) ?? [];
-  assert.match(layer, /<div id="note-veil" class="sheet-veil">/);
-  assert.match(layer, /<form id="note-form" class="sheet" role="dialog"/);
-  assert.match(layer, /<textarea id="note-text"[^>]*maxlength="200"/);
+test('each calculator has an empty section, a navigation item and a module switch, in the order of IDS', () => {
+  const sections = [...body.matchAll(/<section id="(\w+)" class="calc" hidden><\/section>/g)].map(([, id]) => id);
+  const items = [...body.matchAll(/<button class="nav-item" type="button" data-view="(\w+)">/g)].map(([, id]) => id);
+  const switches = [...body.matchAll(/data-module="(\w+)"/g)].map(([, id]) => id);
+  assert.deepEqual(sections, IDS);
+  assert.deepEqual(items, [...IDS, 'settings']);
+  assert.deepEqual(switches, IDS);
 });
 
 test('the walkthrough has one drawing for each page, in the order of the pages', () => {

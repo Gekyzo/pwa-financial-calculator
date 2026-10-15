@@ -47,13 +47,17 @@ const checkField = (field, text) => {
   return { value };
 };
 
-// The values of the fields that the screen asks, or an error message for each field that is not
-// valid. The choice fields come first, because they decide which fields are asked.
-export const validate = (id, texts) => {
-  const { fields } = CALCULATORS[id];
-  const choices = Object.fromEntries(
-    fields.filter((field) => field.kind === 'choice').map((field) => [field.name, checkField(field, texts[field.name]).value]),
+// The value of each choice field: the typed option, or the first one. They decide which fields
+// are asked.
+export const choicesOf = (id, texts) =>
+  Object.fromEntries(
+    CALCULATORS[id].fields.filter((field) => field.kind === 'choice').map((field) => [field.name, checkField(field, texts[field.name]).value]),
   );
+
+// The values of the fields that the screen asks, or an error message for each field that is not
+// valid.
+export const validate = (id, texts) => {
+  const choices = choicesOf(id, texts);
   const values = { ...choices };
   const errors = {};
   for (const field of shownFields(id, choices)) {

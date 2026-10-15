@@ -8,6 +8,7 @@ const SHELL = [
   './manifest.webmanifest',
   './src/app.js',
   './src/config.js',
+  './src/loan.js',
   './src/number.js',
   './src/ui/context.js',
   './src/ui/controls.js',

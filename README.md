@@ -16,7 +16,7 @@ CSS and ES modules: no build step and no dependencies. Made from `pwa-template`.
 ## Develop
 
 ```sh
-npm run serve   # http://localhost:8080
+npm run serve   # http://localhost:8082
 npm test
 ```
 

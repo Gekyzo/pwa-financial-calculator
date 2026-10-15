@@ -140,7 +140,7 @@ that the input state does not change.
 
 ```sh
 npm test                          # unit tests
-npm run serve                     # http://localhost:8080
+npm run serve                     # http://localhost:8082
 npm run icons                     # write the PNG icons again
 npm run hooks                     # enable .githooks/ in this clone
 npm run release                   # bump the version, commit it and tag it vX.Y.Z

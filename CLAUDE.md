@@ -8,7 +8,7 @@ dependencies. Made from `pwa-template`.
 
 ```sh
 npm test                           # unit tests (node --test)
-npm run serve                      # http://localhost:8080
+npm run serve                      # http://localhost:8082
 npm run icons                      # write the PNG icons again from icons/source.png
 npm run release                    # bump, commit and tag vX.Y.Z; git push --follow-tags deploys
 ```

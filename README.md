@@ -1,26 +1,17 @@
 # Financial Calculator
 
-A template for offline Android PWAs. Plain HTML, CSS and ES modules: no build step and no
-dependencies. It gives a new app:
+An offline Android PWA with four calculators of money, in Spanish and English:
 
-- an offline service worker, an update check with an update toast, and an install button;
-- an adaptive layout: a bottom bar on a phone, a rail on a tablet, list and detail side by side
-  on a wide screen;
-- a design system with a live catalogue at `/designs/`;
-- English and Spanish text, light and dark themes, a left-hand mode;
-- a release script and a GitHub Pages deploy on a version tag;
-- structural tests that keep the layers, the text, the design system and the specification in step.
+- **Loan / mortgage:** the monthly payment (French amortisation), the total interest and a table
+  by year.
+- **Term deposit:** the interest at maturity, monthly or yearly, the withholding (19 % by
+  default) and the APY (TAE).
+- **Savings:** an initial amount and a monthly contribution with monthly compounding, and a table
+  by year.
+- **Simple interest:** `I = P·r·t`, solved for any one of the four.
 
-A small notes list shows each part in use. Replace it with the domain of the app.
-
-## Start a new app
-
-1. Copy the repository without its history: `cp -r pwa-financial-calculator my-app && rm -rf my-app/.git`.
-2. `cd my-app && npm run init -- my-app "My App" [--short "App"] [--theme "#1f7a4d"]`.
-3. `git init -b main && npm run hooks`.
-4. Replace `icons/source.png` (512×512, art inside the centre 80%), then `npm run icons`.
-5. Replace or delete the notes demo. `docs/spec/07-notes.md` lists its files.
-6. `npm test`.
+The results change as you type. Each calculator keeps its last values on the device. Plain HTML,
+CSS and ES modules: no build step and no dependencies. Made from `pwa-template`.
 
 ## Develop
 
@@ -42,6 +33,10 @@ Open the deployed URL in Chrome. Use the **Install** button of Settings, or Chro
 3. `git push --follow-tags`. The workflow `.github/workflows/pages.yml` deploys the tag.
 
 Set the repository's Pages source to "GitHub Actions" once.
+
+## Specification
+
+`docs/spec/README.md`. The calculators are `docs/spec/07-calculators.md`.
 
 ## Design system
 

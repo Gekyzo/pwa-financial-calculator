@@ -1,6 +1,7 @@
 # Calculators
 
 The domain of the app: four calculators of money. Each one is a section and a module (MOD-1).
+The name of the app is Calculadora financiera in `es` and Financial Calculator in `en`.
 
 ## Numbers
 

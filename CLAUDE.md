@@ -1,7 +1,8 @@
 # pwa-financial-calculator
 
-A template for offline Android PWAs: plain HTML, CSS and ES modules, no build step and
-no dependencies. Copy it and run `npm run init` to start a new app.
+An offline Android PWA with four calculators of money: loan or mortgage, term deposit,
+savings and simple interest. Plain HTML, CSS and ES modules, no build step and no
+dependencies. Made from `pwa-template`.
 
 ## Commands
 
@@ -9,7 +10,6 @@ no dependencies. Copy it and run `npm run init` to start a new app.
 npm test                           # unit tests (node --test)
 npm run serve                      # http://localhost:8080
 npm run icons                      # write the PNG icons again from icons/source.png
-npm run init -- <slug> "<Name>"    # turn a copy into a new app (once)
 npm run release                    # bump, commit and tag vX.Y.Z; git push --follow-tags deploys
 ```
 

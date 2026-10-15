@@ -62,4 +62,6 @@ export default {
   'error.textRequired': 'Write a text.',
   'error.textTooLong': 'At most {max} characters.',
   'error.noteMissing': 'The note no longer exists.',
+  'error.required': 'Enter a number.',
+  'error.notNumber': 'That is not a number.',
 };

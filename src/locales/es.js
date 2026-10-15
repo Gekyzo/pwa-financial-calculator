@@ -62,4 +62,6 @@ export default {
   'error.textRequired': 'Escribe un texto.',
   'error.textTooLong': 'Máximo {max} caracteres.',
   'error.noteMissing': 'La nota ya no existe.',
+  'error.required': 'Escribe un número.',
+  'error.notNumber': 'No es un número.',
 };

@@ -44,3 +44,34 @@ The domain of the app: four calculators of money. Each one is a section and a mo
 - **CALC-8** `simpleInterest` solves `I = P·r·t` for the unknown that the user picks: the
   interest, the principal, the rate or the years. An unknown with a divisor of 0 (a principal at
   a rate of 0, for one) is `error.zeroDivisor`.
+
+## Fields
+
+- **CALC-9** `CALCULATORS` describes each calculator: its fields, and the results and the table of
+  its values. A field is a number of a kind (money, percent, years, months) inside a range, whole
+  for the years of a loan and of savings and for the months of a deposit, or a choice. A choice of
+  simple interest picks the unknown, and the screen does not ask that field.
+
+  | Calculator | Fields | Results |
+  |---|---|---|
+  | loan | amount, rate, years | payment, total interest, total paid; a table by year |
+  | deposit | amount, rate, months, compounding, withholding | final amount, net interest, gross interest, withheld, APY |
+  | savings | initial amount, monthly contribution, rate, years | final balance, contributed, interest; a table by year |
+  | interest | solve, principal, rate, years, interest | the unknown that it solves |
+
+- **CALC-10** `validate` checks the fields that the screen asks. A field that is blank is
+  `error.required`, one that is not a number is `error.notNumber`, one out of its range is
+  `error.outOfRange` with its `min` and `max`, and a whole field with decimals is
+  `error.notWhole`. An unknown choice is the first option. Only valid fields give results.
+
+## Doc
+
+- **CALC-11** The doc is `{ version: 1, inputs: { <calculator>: { <field>: text } } }`, stored as
+  JSON under `pwa-financial-calculator.inputs`. It keeps the text of a field as the user typed it,
+  valid or not, cut at 40 characters, so a reload shows the same screen. A field with no text
+  shows its initial value in the number format of the language.
+- **CALC-12** `normalizeInputs` accepts a doc of version 1. It keeps the texts of known fields of
+  known calculators and drops the rest. A stored doc that is not valid is kept under
+  `pwa-financial-calculator.inputs.corrupt`, and the app starts with the initial values.
+- **CALC-13** `resetInputs` puts one calculator back to its initial values. An unknown calculator
+  or field is `error.fieldMissing`, and nothing changes.

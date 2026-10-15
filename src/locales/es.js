@@ -65,4 +65,7 @@ export default {
   'error.required': 'Escribe un número.',
   'error.notNumber': 'No es un número.',
   'error.zeroDivisor': 'No tiene solución: un valor es 0.',
+  'error.outOfRange': 'Entre {min} y {max}.',
+  'error.notWhole': 'Sin decimales.',
+  'error.fieldMissing': 'Ese campo no existe.',
 };

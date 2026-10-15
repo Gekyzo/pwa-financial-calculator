@@ -10,6 +10,8 @@
 | `src/deposit.js` | The interest, the withholding and the APY of a term deposit | nothing |
 | `src/savings.js` | The growth of savings with a monthly contribution | nothing |
 | `src/interest.js` | Simple interest, solved for any one unknown | nothing |
+| `src/calculators.js` | The fields, the results and the table of each calculator | `loan`, `deposit`, `savings`, `interest` |
+| `src/inputs.js` | The doc of typed texts, its validation and the results of a calculator | `config`, `calculators`, `number` |
 | `src/version.js` | Version rules and the update offer rule | nothing |
 | `src/i18n.js` | The language choice and the translator | `locales/*` |
 | `src/sections.js` | The order of the sections and the rule of the slide between them | nothing |
@@ -90,6 +92,8 @@ The doc keys are in [07-notes.md](07-notes.md). The device preferences are `pwa-
 | `tests/deposit.test.js` | The interest and the APY of a term deposit (CALC-5, CALC-6) |
 | `tests/savings.test.js` | The final balance and the year table of savings (CALC-7) |
 | `tests/interest.test.js` | The four unknowns of simple interest (CALC-8) |
+| `tests/calculators.test.js` | The fields and the results of each calculator (CALC-9) |
+| `tests/inputs.test.js` | The doc of the inputs, the validation of the fields (CALC-10 to CALC-13) |
 | `tests/storage.test.js` | Load, save, the corrupt copy, export, import and the device preferences |
 | `tests/install.test.js` | The install offer states (INS-1) |
 | `tests/swipe.test.js` | The settle rule of a row slide |

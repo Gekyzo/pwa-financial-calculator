@@ -1,5 +1,5 @@
 export default {
-  'app.title': 'Calculadora financiera',
+  'app.title': 'Compound',
   'app.description': 'Calculadora de préstamos, depósitos, ahorro e intereses',
   'nav.label': 'Secciones',
   'nav.loan': 'Préstamo',

@@ -1,5 +1,5 @@
 export default {
-  'app.title': 'Financial Calculator',
+  'app.title': 'Compound',
   'app.description': 'Calculator for loans, deposits, savings and interest',
   'nav.label': 'Sections',
   'nav.loan': 'Loan',

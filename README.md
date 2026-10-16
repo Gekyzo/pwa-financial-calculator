@@ -1,4 +1,4 @@
-# Financial Calculator
+# Compound
 
 An offline Android PWA with four calculators of money, in Spanish and English:
 

@@ -1,4 +1,4 @@
-const CACHE = 'pwa-financial-calculator-shell-v2';
+const CACHE = 'pwa-financial-calculator-shell-v3';
 
 const SHELL = [
   './',

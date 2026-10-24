@@ -15,7 +15,7 @@ Rules of `sw.js`, `src/version.js`, `version.json`, `scripts/bump-version.mjs`,
 - **SW-3** At its install the worker downloads the full shell past the HTTP cache, so the shell is
   never a mix of two deploys. It then takes control at once (`skipWaiting`, `clients.claim`).
 - **SW-4** At its activation the worker deletes each cache that is not the current one or
-  `pwa-financial-calculator-manifest` (SW-13). The cache name is `pwa-financial-calculator-shell-v2`; it went up for design system 0.7.1.
+  `pwa-financial-calculator-manifest` (SW-13). The cache name is `pwa-financial-calculator-shell-v3`; it went up for design system 0.7.1 and 0.7.2.
 - **SW-5** The worker answers only `GET` requests of its own origin.
 - **SW-6** A request is answered stale-while-revalidate: the cached copy at once, and a fresh copy
   goes into the cache in the background for the next start. The query of the URL is ignored for

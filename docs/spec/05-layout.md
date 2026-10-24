@@ -30,6 +30,15 @@ class (CALC-14).
   place closes, or its place opens and the dust settles (`src/ui/dust.js`). With reduced motion
   the item goes or comes at once.
 
+## Settings
+
+- **SET-1** Settings is a column of groups, each a `list-group-head` above a `list-group` of
+  settings rows, as in pwa-shopping-list: **Backup** (**Export**, **Import**), **Preferences**
+  (**Language**, **Number and date format**, **Hand**, **Theme**), **Modules** (MOD-1), **App**
+  (INS-2) and **Help** (ONB-3), then the version lines (VER-4). A row of Preferences shows its
+  current value and a chevron (a format shows its name, with no sample, I18N-7), and a tap on it
+  opens the native picker of its select. A row that opens something ends with a chevron.
+
 ## Walkthrough
 
 - **ONB-1** The walkthrough shows at the start of a new install only: no `pwa-financial-calculator.onboarded`

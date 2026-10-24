@@ -25,7 +25,8 @@ This document holds the rules of the app only.
   layer, so that it wins; the block documents the parts, variants and states that the app adds.
   A version holds only the rules that differ from the shared ones, so that a change of the shared
   sheet reaches the app. No other rule of `components` or `layouts` repeats a selector of the
-  shared sheet. This app has no version of a shared component.
+  shared sheet. The one version of a shared component is `list-group` in `settings`: the select
+  of a row of Preferences lies over the row (SET-1).
 - **DSV-4** A change of a shared part is made in `pwa-design-system`, then `npm run ds` here.
   Nothing edits `vendor/` by hand, and `npm run init` copies it as it is (ENG-17).
 
@@ -36,4 +37,4 @@ The parts of `styles.css`, by layer. The shared parts are in the design system.
 | Layer | Parts |
 |---|---|
 | tokens | `--primary` and `--on-primary` take `--done` and `--on-done`: one green for the main action, the main result and the checked state |
-| screens | calculators: `calc` · settings: `settings`, `about`, `version-status` · nav: `dust` · onboarding: `onboarding`, `onboarding-art` |
+| screens | calculators: `calc` · settings: `settings` (version of `list-group`), `about`, `version-status` · nav: `dust` · onboarding: `onboarding`, `onboarding-art` |

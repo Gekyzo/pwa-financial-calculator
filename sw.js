@@ -1,4 +1,4 @@
-const CACHE = 'pwa-financial-calculator-shell-v3';
+const CACHE = 'pwa-financial-calculator-shell-v4';
 
 const SHELL = [
   './',
@@ -33,6 +33,7 @@ const SHELL = [
   './src/modules.js',
   './src/storage.js',
   './src/version.js',
+  './src/whatsnew.js',
   './src/i18n.js',
   './src/locales/en.js',
   './src/locales/es.js',

@@ -9,7 +9,8 @@ Rules of `sw.js`, `src/version.js`, `version.json`, `scripts/bump-version.mjs`,
   a connection only.
 - **SW-2** The app shell is the list `SHELL` of `sw.js`: the page, the two stylesheets, the
   vendored font `geist.woff2` (DSV-2),
-  the manifest, each module of `src/`, each catalog, `version.json`, the icons of the app and the
+  the manifest, each module of `src/`, the vendored `sheet.js` (DSV-2), each catalog,
+  `version.json`, each release-notes file (VER-21), the icons of the app and the
   icon sprite `icons.svg`. A file that the app loads and that is not in `SHELL` does not work
   offline at the first start.
 - **SW-3** At its install the worker downloads the full shell past the HTTP cache, so the shell is
@@ -110,6 +111,26 @@ Rules of `sw.js`, `src/version.js`, `version.json`, `scripts/bump-version.mjs`,
   release commit holds them. `npm run release` stops, and writes nothing, when `Unreleased` has
   notes in some languages and not in the others, or when the files do not have the same released
   versions; the error names the languages.
+- **VER-21** At each start the app reads the release notes of the language of the screen, or
+  `release-notes/en.md` when that file cannot be read. Each file is in `SHELL`. It compares them
+  with the stored seen version (`pwa-financial-calculator.seen-version`) and the running version
+  (`nextSeen`):
+  - nothing stored (a first start, or a start from before this rule): it stores the running
+    version and shows nothing;
+  - no notes could be read, or the walkthrough or another sheet covers the screen: it shows and
+    stores nothing, and the next start tries again;
+  - the notes have versions after the seen one and not after the running one: the **What's new**
+    sheet shows them (VER-22), and its close stores the newest of them. A running version whose
+    notes are not in the cache yet thus stays unseen;
+  - otherwise it shows and stores nothing. The seen version never goes down.
+
+  A storage that cannot be read shows nothing.
+- **VER-22** The **What's new** sheet has the title `whatsNew.title` and `whatsNew.close`, and
+  one block for each version, newest first: `whatsNew.version` with the day in the long form of
+  the language (not the format of I18N-9), then the notes as a list. A `` `name` `` in a note
+  shows as the key of the walkthrough. The veil, `Close`, a drag down and `Escape` close it.
+- **VER-23** **Help** in Settings has the row `settings.whatsNew` after `settings.onboarding`,
+  which shows the sheet with every version. The row is hidden while the notes have no version.
 
 ## Installation
 

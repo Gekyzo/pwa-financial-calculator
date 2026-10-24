@@ -5,6 +5,7 @@ import { bind as bindSettings, applyLanguage } from '#ui/settings';
 import { bind as bindInstall, renderInstall } from '#ui/install';
 import { readVersion, renderVersion, offerUpdate } from '#ui/update';
 import { bind as bindOnboarding, closeOnboarding, turnOnboarding } from '#ui/onboarding';
+import { bind as bindWhatsNew, startWhatsNew, isWhatsNewOpen, closeWhatsNew } from '#ui/whatsnew';
 
 const renderAll = () => {
   renderNav();
@@ -20,6 +21,7 @@ bindNav();
 bindSettings();
 bindInstall();
 bindOnboarding();
+bindWhatsNew();
 
 document.addEventListener(
   'click',
@@ -38,6 +40,7 @@ document.addEventListener('keydown', (event) => {
     else if (event.key === 'ArrowLeft') turnOnboarding(-1);
     return;
   }
+  if (event.key === 'Escape' && isWhatsNewOpen()) closeWhatsNew();
 });
 
 $('toast-action').addEventListener('click', () => {
@@ -55,5 +58,6 @@ navigator.serviceWorker?.register('./sw.js').catch(() => {});
 readVersion('./version.json').then((running) => {
   ui.version.running = running;
   renderVersion();
+  startWhatsNew(running);
   navigator.serviceWorker?.ready.then(offerUpdate).catch(() => {});
 });

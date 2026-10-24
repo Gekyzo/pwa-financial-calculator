@@ -30,6 +30,7 @@
 | `src/ui/settings.js` | Settings, and the text of the page in its language | `inputs`, `storage`, `i18n`, `number`, `modules`, `ui/context`, `ui/update`, `ui/onboarding` |
 | `src/ui/dust.js` | The dust of a navigation item (optional) | `particles`, `ui/context`, `ui/controls` |
 | `src/ui/onboarding.js` | The walkthrough (optional) | `onboarding`, `sections`, `storage`, `ui/context`, `ui/controls` |
+| `src/ui/whatsnew.js` | The release notes sheet, its Settings row and the seen version | `whatsnew`, `onboarding`, `i18n`, `storage`, `ds/sheet`, `ui/context` |
 | `src/app.js` | Wires the views, the global keys, the service worker and the update check | all of the above |
 
 ## Code rules
@@ -46,6 +47,7 @@
 - **ENG-6** A module of `src/` is imported by its alias, `from '#loan'`, never by a relative
   path. Node resolves `#name` through `imports` of `package.json`; the browser resolves it through
   the import map of `index.html`. `tests/aliases.test.js` checks that the two agree.
+  `#ds/<name>` names the module `vendor/design-system/<name>.js` (DSV-1).
 - **ENG-7** A new id comes from `crypto.randomUUID()`. An operation that creates a record takes
   the id as an optional parameter, for the tests.
 - **ENG-8** Every storage key is `<slug>.<name>`, from `keyOf` of `src/storage.js` or `APP_SLUG`
@@ -62,7 +64,8 @@
 ## Storage keys
 
 The doc keys are in [07-calculators.md](07-calculators.md). The device preferences are `pwa-financial-calculator.lang`, `pwa-financial-calculator.format`,
-`pwa-financial-calculator.hand`, `pwa-financial-calculator.theme`, `pwa-financial-calculator.modules` and `pwa-financial-calculator.onboarded`.
+`pwa-financial-calculator.hand`, `pwa-financial-calculator.theme`, `pwa-financial-calculator.modules`, `pwa-financial-calculator.onboarded` and
+`pwa-financial-calculator.seen-version` (VER-21).
 
 ## Change guide
 
@@ -92,17 +95,17 @@ The doc keys are in [07-calculators.md](07-calculators.md). The device preferenc
 | `tests/inputs.test.js` | The doc of the inputs, the validation of the fields (CALC-10 to CALC-13) |
 | `tests/storage.test.js` | Load, save, the corrupt copy, export, import and the device preferences |
 | `tests/install.test.js` | The install offer states (INS-1) |
-| `tests/sw.test.js` | The manifest text that the worker puts in place (SW-13) |
+| `tests/sw.test.js` | The manifest text that the worker puts in place (SW-13); the release notes and `sheet.js` in `SHELL` |
 | `tests/sections.test.js` | The slide between sections |
 | `tests/modules.test.js` | The visible sections and the switch of a module |
 | `tests/particles.test.js` | The particles of a picture and their place in time |
 | `tests/onboarding.test.js` | The show rule and the page steps of the walkthrough |
 | `tests/version.test.js` | Version rules and the update offer rule |
-| `tests/whatsnew.test.js` | The parse of the release notes and the unseen versions |
+| `tests/whatsnew.test.js` | The parse of the release notes, the unseen versions and the seen version to store (VER-21) |
 | `tests/release-notes-files.test.js` | One release-notes file for each language, with the same versions (VER-19) |
 | `tests/i18n.test.js` | The language choice, the translator, the parity of the catalogs |
 | `tests/markup.test.js` | `index.html` holds no text of its own; the sheet and the walkthrough markup |
-| `tests/aliases.test.js` | The import map against `package.json` |
+| `tests/aliases.test.js` | The import map against `package.json`; each `#ds/` alias names a vendored module |
 | `tests/layers.test.js` | The layer rules and `SHELL` (ENG-16) |
 | `tests/design.test.js` | Each rule of `vendor/design-system/rules.js` over the two stylesheets, `index.html`, `icons.svg`, `src/ui/` and `designs/`, and the parts of `styles.css` (DSV-3) |
 | `tests/vendor.test.js` | The copy of the design system: its hashes, its files, its place in `index.html`, `designs/index.html` and `SHELL`, no copied rule in `styles.css` (DSV-1 to DSV-3) |

@@ -16,8 +16,9 @@ This document holds the rules of the app only.
   file that differs from its hash fails `tests/vendor.test.js`. The tests read the copy only, so
   they pass with no `../pwa-design-system`.
 - **DSV-2** `index.html` and `designs/index.html` link `vendor/design-system/design-system.css`
-  before `styles.css`, and `SHELL` of `sw.js` has both and `geist.woff2` (SW-2). The app has no
-  sheet, so the page does not load `sheet.js` and `SHELL` does not hold it. A layer of the two sheets is one
+  before `styles.css`, and `SHELL` of `sw.js` has both and `geist.woff2` (SW-2). The one sheet
+  of the app, **What's new** (VER-22), imports `sheet.js` as `#ds/sheet` (ENG-6), and `SHELL`
+  holds it. A layer of the two sheets is one
   layer: a rule of `styles.css` comes after the shared rules of its layer.
 - **DSV-3** `styles.css` starts with the same layer statement and holds the parts of the app only:
   its tokens, the `body` rule and the font of the controls, the screen parts, and the components of the app.
@@ -37,4 +38,4 @@ The parts of `styles.css`, by layer. The shared parts are in the design system.
 | Layer | Parts |
 |---|---|
 | tokens | `--primary` and `--on-primary` take `--done` and `--on-done`: one green for the main action, the main result and the checked state |
-| screens | calculators: `calc` · settings: `settings` (version of `list-group`), `about`, `version-status` · nav: `dust` · onboarding: `onboarding`, `onboarding-art` |
+| screens | calculators: `calc` · settings: `settings` (version of `list-group`), `about`, `version-status` · nav: `dust` · onboarding: `onboarding`, `onboarding-art` · whatsnew: `whatsnew` |

@@ -1,7 +1,7 @@
 {
-  "name": "Compound",
+  "name": "Financial calculator - Compound",
   "short_name": "Compound",
-  "description": "Installable web app template",
+  "description": "Calculator for loans, deposits, savings and interest",
   "lang": "en",
   "id": "/pwa-financial-calculator/",
   "start_url": "./",

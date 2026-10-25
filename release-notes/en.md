@@ -5,6 +5,7 @@ What changes for you in each version of the app. The newest version is first.
 ## Unreleased
 
 - In Simple interest, the highlight of the choice to calculate sits under the option you chose.
+- In Simple interest, a paragraph under the choice to calculate says what each option calculates and what to enter.
 
 ## 0.1.9 - 2026-10-24
 

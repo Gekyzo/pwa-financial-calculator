@@ -59,7 +59,14 @@ const choiceField = (id, field, text) => {
   group.style.setProperty('--segment-index', String(Math.max(0, field.options.indexOf(text))));
   group.setAttribute('role', 'group');
   group.setAttribute('aria-label', t(`field.${field.name}`));
-  return el('div', { className: 'calc-choice' }, [el('span', { className: 'calc-choice-label', textContent: t(`field.${field.name}`) }), group]);
+  const parts = [el('span', { className: 'calc-choice-label', textContent: t(`field.${field.name}`) }), group];
+  // The paragraph about the chosen option (CALC-18). A choice builds the form again, so it follows the choice.
+  if (field.explained) {
+    const about = el('p', { className: 'calc-choice-about', id: `${id}-${field.name}-about`, textContent: t(`about.${field.name}.${text}`) });
+    group.setAttribute('aria-describedby', about.id);
+    parts.push(about);
+  }
+  return el('div', { className: 'calc-choice' }, parts);
 };
 
 const buildForm = (id, section, texts, fields) => {

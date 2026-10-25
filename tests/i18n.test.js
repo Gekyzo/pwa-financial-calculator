@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { CATALOGS, FALLBACK, LANGUAGES, LANGUAGE_NAMES, FORMATS, FORMAT_NAMES, intlTag, resolveLanguage, resolveFormat, translator } from '#i18n';
+import { CALCULATORS } from '#calculators';
 
 const fake = {
   en: { hello: 'Hello {name}', items: { one: '{count} item', other: '{count} items' }, onlyEn: 'English only' },
@@ -162,4 +163,14 @@ test('app.title is a descriptor in each language, then the brand, as the fallbac
   const html = read('index.html');
   const [, lang] = html.match(/<html lang="(\w+)"/);
   assert.equal(html.match(/<title>(.*)<\/title>/)[1], CATALOGS[lang]['app.title']);
+});
+
+test('each option of an explained choice has its paragraph in each catalog (CALC-18)', () => {
+  const explained = Object.values(CALCULATORS).flatMap(({ fields }) => fields.filter((field) => field.explained));
+  assert.ok(explained.length > 0);
+  for (const lang of LANGUAGES) {
+    for (const { name, options } of explained) {
+      for (const option of options) assert.ok(Object.hasOwn(CATALOGS[lang], `about.${name}.${option}`), `${lang} ${name}.${option}`);
+    }
+  }
 });

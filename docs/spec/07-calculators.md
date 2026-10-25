@@ -97,3 +97,5 @@ The name of the app is Compound in `es` and in `en`.
   only when the language, the unknown of simple interest or a reset changes its fields.
 - **CALC-17** A choice is a segmented control. Its knob is one option wide and sits under the
   chosen option, whatever the number of options: the four of the unknown of simple interest too.
+- **CALC-18** Under the choice of the unknown of simple interest, a paragraph says what the chosen
+  option calculates, which fields to enter and what the result is for. It changes with the choice.

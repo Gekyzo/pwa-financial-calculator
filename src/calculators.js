@@ -5,14 +5,14 @@ import { simpleInterest, SOLVE } from '#interest';
 
 // The calculators, in the order of the navigation. A field is a number of a `kind` (money,
 // percent, years, months) between `min` and `max`, whole when `whole`, or a `choice` of
-// `options`. `initial` is its value before the user types one. `compute` takes the values of the
+// `options`, with a paragraph about the chosen option when `explained`. `initial` is its value before the user types one. `compute` takes the values of the
 // fields and gives the results as `{ key, kind, value }` and, for some, a table by year.
 export const IDS = ['loan', 'deposit', 'savings', 'interest'];
 
 const MAX_MONEY = 1e9;
 const money = (name, initial, min = 0.01) => ({ name, kind: 'money', min, max: MAX_MONEY, initial });
 const percent = (name, initial) => ({ name, kind: 'percent', min: 0, max: 100, initial });
-const choice = (name, options) => ({ name, kind: 'choice', options, initial: options[0] });
+const choice = (name, options, explained = false) => ({ name, kind: 'choice', options, initial: options[0], explained });
 
 const result = (key, kind, value) => ({ key, kind, value });
 
@@ -89,7 +89,7 @@ export const CALCULATORS = {
   },
   interest: {
     fields: [
-      choice('solve', SOLVE),
+      choice('solve', SOLVE, true),
       money('principal', 5000),
       percent('rate', 4),
       { name: 'years', kind: 'years', min: 0.01, max: 100, initial: 3 },

@@ -4,6 +4,10 @@ What changes for you in each version of the app. The newest version is first.
 
 ## Unreleased
 
+No change.
+
+## 0.1.11 - 2026-10-25
+
 - In Spanish, the annual rate is now called "tipo anual", and the rate option of Simple interest is "Tipo", so it is not confused with "Intereses".
 
 ## 0.1.10 - 2026-10-25

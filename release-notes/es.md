@@ -4,6 +4,10 @@ Lo que cambia para ti en cada versión de la app. La versión más nueva va prim
 
 ## Unreleased
 
+No change.
+
+## 0.1.11 - 2026-10-25
+
 - El interés anual se llama ahora tipo anual, y la opción Interés de Interés simple se llama Tipo, para no confundirla con Intereses.
 
 ## 0.1.10 - 2026-10-25

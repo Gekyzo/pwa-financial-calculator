@@ -4,7 +4,7 @@ Technical changes, newest first. What a user sees of a version goes to `release-
 
 ## Unreleased
 
-No change.
+- A choice field sets `--segment-count` and `--segment-index` on its `.segmented`: the design system sizes the knob only for 2 or 3 segments, so the 4 of the simple interest unknown drew a 1/3-wide knob on the first segment (CALC-17).
 
 ## 0.1.9 - 2026-10-24
 

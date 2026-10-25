@@ -37,3 +37,9 @@ test('the parts of the app are documented in styles.css (DSV-3)', () => {
 test('styles.css has one version of a shared component, list-group in settings (DSV-3)', () => {
   assert.deepEqual([...read('styles.css').matchAll(/\/\*\s*@extends\s+([\w-]+)/g)].map(([, name]) => name), ['list-group']);
 });
+
+test('a choice sizes and places the knob of its segmented for any number of options (CALC-17)', () => {
+  const view = read('src/ui/calculator.js');
+  assert.match(view, /setProperty\('--segment-count', String\(field\.options\.length\)\)/);
+  assert.match(view, /setProperty\('--segment-index'/);
+});

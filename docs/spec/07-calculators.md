@@ -95,3 +95,5 @@ The name of the app is Compound in `es` and in `en`.
   (CALC-8) show the message in place of the results.
 - **CALC-16** A keystroke keeps the form, so the field keeps its focus. The form is built again
   only when the language, the unknown of simple interest or a reset changes its fields.
+- **CALC-17** A choice is a segmented control. Its knob is one option wide and sits under the
+  chosen option, whatever the number of options: the four of the unknown of simple interest too.

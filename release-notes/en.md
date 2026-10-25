@@ -4,7 +4,7 @@ What changes for you in each version of the app. The newest version is first.
 
 ## Unreleased
 
-No change.
+- In Simple interest, the highlight of the choice to calculate sits under the option you chose.
 
 ## 0.1.9 - 2026-10-24
 

@@ -53,6 +53,10 @@ const choiceField = (id, field, text) => {
     return button;
   };
   const group = el('div', { className: 'segmented' }, field.options.map(segment));
+  // The design system sizes and moves the knob by child position up to three segments only;
+  // the unknown of simple interest has four (CALC-17).
+  group.style.setProperty('--segment-count', String(field.options.length));
+  group.style.setProperty('--segment-index', String(Math.max(0, field.options.indexOf(text))));
   group.setAttribute('role', 'group');
   group.setAttribute('aria-label', t(`field.${field.name}`));
   return el('div', { className: 'calc-choice' }, [el('span', { className: 'calc-choice-label', textContent: t(`field.${field.name}`) }), group]);

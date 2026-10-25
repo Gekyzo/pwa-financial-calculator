@@ -4,7 +4,7 @@ Technical changes, newest first. What a user sees of a version goes to `release-
 
 ## Unreleased
 
-No change.
+- `es`: the rate is `tipo` (`field.rate`, `choice.solve.rate`, `result.rate` and the `about.solve.*` texts), apart from `Intereses`, the money; `nav.interest` stays `Interés`.
 
 ## 0.1.10 - 2026-10-25
 

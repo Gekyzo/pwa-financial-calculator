@@ -4,6 +4,10 @@ Lo que cambia para ti en cada versión de la app. La versión más nueva va prim
 
 ## Unreleased
 
+No change.
+
+## 0.1.10 - 2026-10-25
+
 - En Interés simple, la marca de lo que quieres calcular queda bajo la opción que eliges.
 - En Interés simple, un párrafo bajo la elección de qué calcular dice qué calcula cada opción y qué datos escribir.
 

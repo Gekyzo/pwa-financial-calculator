@@ -4,6 +4,10 @@ Technical changes, newest first. What a user sees of a version goes to `release-
 
 ## Unreleased
 
+No change.
+
+## 0.1.10 - 2026-10-25
+
 - A choice field sets `--segment-count` and `--segment-index` on its `.segmented`: the design system sizes the knob only for 2 or 3 segments, so the 4 of the simple interest unknown drew a 1/3-wide knob on the first segment (CALC-17).
 - A choice field built with `explained` shows `about.<field>.<option>` of the chosen option in a `calc-choice-about` paragraph, the `aria-describedby` of its group; the unknown of simple interest uses it (CALC-18).
 

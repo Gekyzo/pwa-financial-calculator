@@ -4,6 +4,10 @@ Technical changes, newest first. What a user sees of a version goes to `release-
 
 ## Unreleased
 
+No change.
+
+## 0.1.12 - 2026-10-28
+
 - New art in `icons/source.png`, a stack of gold coins with a green sprout; `npm run icons` wrote the PNG icons and the logo again (VER-15).
 
 ## 0.1.11 - 2026-10-25

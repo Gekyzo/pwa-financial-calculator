@@ -4,7 +4,7 @@ Lo que cambia para ti en cada versión de la app. La versión más nueva va prim
 
 ## Unreleased
 
-No change.
+- La app tiene un icono nuevo: una pila de monedas de oro con un brote verde.
 
 ## 0.1.11 - 2026-10-25
 

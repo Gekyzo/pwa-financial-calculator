@@ -4,6 +4,10 @@ Lo que cambia para ti en cada versión de la app. La versión más nueva va prim
 
 ## Unreleased
 
+No change.
+
+## 0.1.13 - 2026-10-31
+
 - **Borrar todos los datos** en Ajustes borra los valores de las calculadoras y las preferencias de este dispositivo, y la app empieza como nueva.
 - En **Novedades**, las palabras en negrita se ven en negrita, y ya no con asteriscos.
 

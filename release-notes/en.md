@@ -4,6 +4,10 @@ What changes for you in each version of the app. The newest version is first.
 
 ## Unreleased
 
+No change.
+
+## 0.1.13 - 2026-10-31
+
 - **Delete all data** in Settings removes the values of the calculators and the preferences from this device, and the app starts as new.
 - In **What's new**, the words in bold show in bold, and no longer with asterisks.
 

@@ -15,20 +15,43 @@ const keyPart = (text) => {
   return match ? { text: match[2] ?? '', key: true, icon: match[1] } : { text, key: true };
 };
 
+// The parts of a text outside the keys with the bold state of each: a pair of `**` opens and
+// closes a bold text, also across keys. A last `**` with no pair stays in the text.
+const BOLD = '**';
+const boldParts = (parts) => {
+  const marks = parts.reduce((count, part) => count + (part.key ? 0 : part.text.split(BOLD).length - 1), 0);
+  let paired = marks - (marks % 2);
+  let strong = false;
+  return parts.flatMap((part) => {
+    if (part.key) return [{ ...part, strong }];
+    const [first, ...rest] = part.text.split(BOLD);
+    const pieces = [{ text: first, key: false, strong }];
+    rest.forEach((piece) => {
+      if (paired > 0) {
+        paired -= 1;
+        strong = !strong;
+        pieces.push({ text: piece, key: false, strong });
+      } else pieces.at(-1).text += BOLD + piece;
+    });
+    return pieces;
+  });
+};
+
 // The parts of a page text. A text between two backticks is a key, such as `↻` or `+`; a
-// backtick with no pair stays in the text.
+// backtick with no pair stays in the text. A text between two `**` is bold: its parts have
+// `strong: true`.
 export const textParts = (text) => {
   const pieces = text.split('`');
   // An even count of pieces means that the last backtick has no pair.
   const open = pieces.length % 2 === 0 ? pieces.splice(-2).join('`') : null;
   const parts = pieces.map((piece, index) => ({ text: piece, key: index % 2 === 1 }));
   if (open !== null) parts.push({ text: open, key: false });
-  return parts
+  return boldParts(parts)
     .filter((part) => part.text)
-    .reduce((joined, part) => {
+    .reduce((joined, { strong, ...part }) => {
       const last = joined.at(-1);
-      if (last && !last.key && !part.key) last.text += part.text;
-      else joined.push(part.key ? keyPart(part.text) : { ...part });
+      if (last && !last.key && !part.key && Boolean(last.strong) === strong) last.text += part.text;
+      else joined.push({ ...(part.key ? keyPart(part.text) : part), ...(strong && { strong: true }) });
       return joined;
     }, []);
 };

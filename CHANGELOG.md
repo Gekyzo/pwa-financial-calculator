@@ -4,6 +4,7 @@ Technical changes, newest first. What a user sees of a version goes to `release-
 
 ## Unreleased
 
+- **What's new** shows a `**text**` of a note bold (VER-22): `textParts` in `src/onboarding.js` gives the parts of a paired `**` with `strong: true`, also across keys, and `src/ui/whatsnew.js` draws them in a `<strong>`; a `**` with no pair stays as text.
 - **Delete all data** in Settings › Backup, as in pwa-template (SET-2): `resetAll` in `src/storage.js` removes each `localStorage` key of the app, `<slug>.*`, and no key of another app of the origin; the page loads again as a new install. Keys `settings.reset`, `reset.confirm`, `error.resetFailed`.
 
 ## 0.1.12 - 2026-10-28

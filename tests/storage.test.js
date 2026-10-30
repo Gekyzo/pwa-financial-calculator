@@ -30,6 +30,7 @@ import {
   saveSeen,
   loadOnboarded,
   saveOnboarded,
+  resetAll,
 } from '#storage';
 
 const fakeStorage = (initial = {}) => {
@@ -38,6 +39,10 @@ const fakeStorage = (initial = {}) => {
     getItem: (key) => (data.has(key) ? data.get(key) : null),
     setItem: (key, value) => data.set(key, String(value)),
     removeItem: (key) => data.delete(key),
+    key: (index) => [...data.keys()][index] ?? null,
+    get length() {
+      return data.size;
+    },
   };
 };
 
@@ -287,4 +292,22 @@ test('saveSeen stores the version, and is false for a storage that throws', () =
   assert.equal(saveSeen(storage, '1.2.3'), true);
   assert.equal(loadSeen(storage), '1.2.3');
   assert.equal(saveSeen(brokenStorage(), '1.2.3'), false);
+});
+
+test('resetAll removes every key of the app, the corrupt copies too, and keeps the keys of other apps (SET-2)', () => {
+  const storage = fakeStorage({
+    [keyOf('inputs')]: '{}',
+    [`${keyOf('inputs')}.corrupt`]: 'x',
+    [keyOf('lang')]: 'es',
+    [keyOf('onboarded')]: '1',
+    'other.inputs': 'kept',
+    [`${APP_SLUG}x.lang`]: 'kept',
+  });
+  assert.equal(resetAll(storage), true);
+  assert.deepEqual([...Array(storage.length).keys()].map((index) => storage.key(index)).sort(), ['other.inputs', `${APP_SLUG}x.lang`]);
+});
+
+test('resetAll reports a storage that refuses the removal (SET-2)', () => {
+  const storage = { length: 1, key: () => keyOf('lang'), removeItem: () => { throw new Error('denied'); } };
+  assert.equal(resetAll(storage), false);
 });

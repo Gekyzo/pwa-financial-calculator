@@ -27,7 +27,7 @@
 | `src/ui/install.js` | The Install button | `install`, `ui/context` |
 | `src/ui/nav.js` | The navigation, the change and the slide of a section | `sections`, `modules`, `ui/context`, `ui/update`, `ui/dust` |
 | `src/ui/calculator.js` | The four calculator sections: their fields, results and table by year | `calculators`, `inputs`, `number`, `ui/context`, `ui/controls` |
-| `src/ui/settings.js` | Settings, and the text of the page in its language | `inputs`, `storage`, `i18n`, `number`, `modules`, `ui/context`, `ui/update`, `ui/onboarding` |
+| `src/ui/settings.js` | Settings, Delete all data (SET-2), and the text of the page in its language | `inputs`, `storage`, `i18n`, `number`, `modules`, `ui/context`, `ui/update`, `ui/onboarding` |
 | `src/ui/dust.js` | The dust of a navigation item (optional) | `particles`, `ui/context`, `ui/controls` |
 | `src/ui/onboarding.js` | The walkthrough (optional) | `onboarding`, `sections`, `storage`, `ui/context`, `ui/controls` |
 | `src/ui/whatsnew.js` | The release notes sheet, its Settings row and the seen version | `whatsnew`, `onboarding`, `i18n`, `storage`, `ds/sheet`, `ui/context` |

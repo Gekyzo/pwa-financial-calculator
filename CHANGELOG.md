@@ -4,7 +4,7 @@ Technical changes, newest first. What a user sees of a version goes to `release-
 
 ## Unreleased
 
-No change.
+- **Delete all data** in Settings › Backup, as in pwa-template (SET-2): `resetAll` in `src/storage.js` removes each `localStorage` key of the app, `<slug>.*`, and no key of another app of the origin; the page loads again as a new install. Keys `settings.reset`, `reset.confirm`, `error.resetFailed`.
 
 ## 0.1.12 - 2026-10-28
 

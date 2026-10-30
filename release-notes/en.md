@@ -4,7 +4,7 @@ What changes for you in each version of the app. The newest version is first.
 
 ## Unreleased
 
-No change.
+- **Delete all data** in Settings removes the values of the calculators and the preferences from this device, and the app starts as new.
 
 ## 0.1.12 - 2026-10-28
 
